@@ -18,7 +18,7 @@ const { GraphQLObjectType,
 const OrganizationType = new GraphQLObjectType({
    name: 'Organization',
    fields: () => ({
-     organizationID: { type: GraphQLID},
+     OrganizationID: { type: GraphQLID},
      Name: { type: GraphQLString},
      Address: {type: GraphQLString},
      Address2: {type: GraphQLString},
@@ -38,16 +38,16 @@ const OrganizationType = new GraphQLObjectType({
      Status: {type: GraphQLString},
      EnteredBy: {type: GraphQLString},
      DateEntered: {type: GraphQLString},
-     ParentOrganizationID: {type: GraphQLID},
+     ParentOrganizationID: {type: GraphQLID}
    })
 });
 
 const MemberType = new GraphQLObjectType({
    name: 'member',
    fields: () => ({
-     memberID: {type: GraphQLID},
-     familyID: {type: GraphQLID},
-     organizationID: {type: GraphQLID},
+     MemberID: {type: GraphQLID},
+     FamilyID: {type: GraphQLID},
+     OrganizationID: {type: GraphQLID},
      FirstName: {type: GraphQLString},
      MiddleName: {type: GraphQLString},
      LastName: {type: GraphQLString},
@@ -83,8 +83,8 @@ const MemberType = new GraphQLObjectType({
 const FamilyType = new GraphQLObjectType({
   name: 'famiy',
   fields: () => ({
-    familyID: {type: GraphQLID},
-    organizationID: {type: GraphQLID},
+    FamilyID: {type: GraphQLID},
+    OrganizationID: {type: GraphQLID},
     FamilyName: {type: GraphQLString},
     Address: {type: GraphQLString},
     Address2: {type: GraphQLString},
@@ -155,8 +155,8 @@ const Mutation = new GraphQLObjectType({
     addMember: {
       type: MemberType,
       args: {
-          familyID: {type: GraphQLID},
-          organizationID: {type: GraphQLID},
+          FamilyID: {type: GraphQLID},
+          OrganizationID: {type: GraphQLID},
           FirstName: {type: GraphQLString},
           MiddleName: {type: GraphQLString},
           LastName: {type: GraphQLString},
@@ -176,8 +176,8 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args){
         let member = new Member({
-          familyID: args.familyID,
-          organizationID: args,organizationID,
+          familyID: args.FamilyID,
+          organizationID: args.OrganizationID,
           FirstName: args.FirstName,
           MiddleName: args.MiddleName,
           LastName: args.LastName,
@@ -195,12 +195,95 @@ const Mutation = new GraphQLObjectType({
           EnteredBy: args.EnteredBy,
           DateEntered: args.DateEntered
         });
-        member.save();
+        return member.save();
+      }
+    },
+    addFamily: {
+      type: FamilyType,
+      args: {
+        FamilyID: {type: GraphQLID},
+        OrganizationID: {type: GraphQLID},
+        FamilyName: {type: GraphQLString},
+        Address: {type: GraphQLString},
+        Address2: {type: GraphQLString},
+        City: {type: GraphQLString},
+        State: {type: GraphQLString},
+        Zip: {type: GraphQLString},
+        Status: {type: GraphQLString},
+        EnteredBy: {type: GraphQLString},
+        DateEntered: {type: GraphQLString}
+      },
+      resolve(parent, args){
+        let family = new Family ({
+          FamilyID: args.FamilyID,
+          OrganizationID: args.OrganizationID,
+          FamilyName: args.FamilyName,
+          Address: args.Address,
+          Address2: args.Address2,
+          City: args.City,
+          State: args.State,
+          Zip: args.Zip,
+          Status: args.Status,
+          EnteredBy: args.EnteredBy,
+          DateEntered: args.DateEntered
+        });
+        return family.save();
+      }
+    },
+    addOrganization: {
+      type: OrganizationType,
+      args: {
+        Name: { type: GraphQLString},
+        Address: {type: GraphQLString},
+        Address2: {type: GraphQLString},
+        City: {type: GraphQLString},
+        State: {type: GraphQLString},
+        Zip: {type: GraphQLString},
+        Country: {type: GraphQLString},
+        PhoneNumber: {type: GraphQLString},
+        Email: {type: GraphQLString},
+        YearFounded: {type: GraphQLString},
+        StoryID: {type: GraphQLID},
+        PictureID: {type: GraphQLID},
+        VideoID: {type: GraphQLID},
+        Description: {type: GraphQLString},
+        Vision: {type: GraphQLString},
+        Mission: {type: GraphQLString},
+        Status: {type: GraphQLString},
+        EnteredBy: {type: GraphQLString},
+        DateEntered: {type: GraphQLString},
+        ParentOrganizationID: {type: GraphQLID}
+      },
+      resolve(parent, args){
+        let organization = new Organization({
+          Name: args.Name,
+          Address: args.Address,
+          Address2: args.Address2,
+          City: args.City,
+          State: args.State,
+          Zip: args.Zip,
+          Country: args.Country,
+          PhoneNumber: args.PhoneNumber,
+          Email: args.Email,
+          YearFounded: args.YearFounded,
+          StoryID: args.StoryID,
+          PictureID: args.PictureID,
+          VideoID: args.VideoID,
+          Description: args.Description,
+          Vision: args.Vision,
+          Mission: args.Mission,
+          Status: args.Status,
+          EnteredBy: args.EnteredBy,
+          DateEntered: args.DateEntered,
+          ParentOrganizationID: args.ParentOrganizationID
+        });
+        return organization.save();
       }
     }
   }
-})
+});
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
   mutation: Mutation
-})
+});

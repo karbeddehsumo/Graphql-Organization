@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-//import { gql } from 'apollo-boost';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import {addOrganizationMutation} from '../../queries/organization';
 
 class OrganizationAdd extends Component {
@@ -169,5 +168,8 @@ submitForm(e){
   }
 }
 
+export default compose(
+  graphql(addOrganizationMutation, {name: "addOrganizationMutation"})
+)(OrganizationAdd);
 
-export default graphql(addOrganizationMutation)(OrganizationAdd);
+//export default graphql(addOrganizationMutation)(OrganizationAdd);
