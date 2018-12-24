@@ -67,13 +67,13 @@ const MemberType = new GraphQLObjectType({
      organization: {
        type: OrganizationType,
        resolve(parent, args){
-         //query database here
+         return Organization.findById(parent.OrganizationID);
        }
      },
      family: {
        type: FamilyType,
        resolve(parent, args){
-         //query database here
+         return Family.findById(parent.FamilyID);
        }
      }
 
@@ -97,7 +97,7 @@ const FamilyType = new GraphQLObjectType({
     members: {
       type: GraphQLList(MemberType),
       resolve(parent, args){
-        //query database herer
+        return Member.find({FamiyID: parent.FamilyID});
       }
     }
 
@@ -109,41 +109,41 @@ const RootQuery = new GraphQLObjectType({
     fields: {
        organization: {
           type: OrganizationType,
-          args: {organizationID: {type: GraphQLID}},
+          args: {OrganizationID: {type: GraphQLID}},
           resolve(parent,args){
-            //call to database
+            return Organization.findById(args.OrganizationID);
           }
        },
        organizations: {
          type: new GraphQLList(OrganizationType),
          resolve(parent, args){
-           //query database
+           return Organization.find({});
          }
        },
        member: {
          type: MemberType,
-         args: {memberID: {type: GraphQLID}},
+         args: {MemberID: {type: GraphQLID}},
          rosolve(parent, args){
-           //query database here
+           return Member.findById(args.MemberID);
          }
        },
        members: {
          type: new GraphQLList(MemberType),
          resolve(parent, args){
-           //query database here
+           return Member.find({});
          }
        },
        family: {
          type:FamilyType,
-         args: {familyID: {type: GraphQLID}},
+         args: {FamilyID: {type: GraphQLID}},
          resolve(parent, args){
-           //query database here
+           return Family.findById(args.FamilyID);
          }
        },
        families:{
          type: new GraphQLList(FamilyType),
          resolve(parent, args){
-           //query database here
+           return Family.find({});
          }
        }
     }

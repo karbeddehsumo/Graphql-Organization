@@ -65,7 +65,6 @@ const getMemberQuery = gql`
 `
 
 const addMemberMutation = gql`
-{
   mutation(
     $MemberID: String!,
     $FamilyID: ID!,
@@ -110,10 +109,7 @@ const addMemberMutation = gql`
     ){
        FirstName
        LastName
-       MemberID
-       OrganizationID
     }
-  }
 }
 `
 export {getMembersQuery, getMemberQuery, addMemberMutation};

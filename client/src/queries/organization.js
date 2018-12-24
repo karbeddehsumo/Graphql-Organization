@@ -3,7 +3,7 @@ import { gql } from 'apollo-boost';
 const getOrganizationsQuery = gql`
 {
   organizations{
-    organizationID
+    OrganizationID
     Name
     Address
     Address2
@@ -72,8 +72,8 @@ const addOrganizationMutation = gql`
          DateEntered: $DateEntered,
          ParentOrganizationID: $ParentOrganizationID
        ){
-         name
-         organizationID
+         Name
+         OrganizationID
        }
      }
 `
