@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
-import {addOrganizationMutation} from '../../queries/organization';
+import {addOrganizationMutation, getOrganizationsQuery} from '../../queries/organization';
 
 class OrganizationAdd extends Component {
 
@@ -56,7 +56,9 @@ submitForm(e){
       EnteredBy: this.state.EnteredBy,
       DateEntered: this.state.DateEntered,
       ParentOrganizationID: this.state.ParentOrganizationID
-    }
+    },
+    refetchQueries: [{query: getOrganizationsQuery}]
+
   });
 }
   render() {

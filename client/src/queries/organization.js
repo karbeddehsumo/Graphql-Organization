@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 const getOrganizationsQuery = gql`
 {
-  organizations{
+   organizations{
     OrganizationID
     Name
     Address
@@ -78,4 +78,32 @@ const addOrganizationMutation = gql`
      }
 `
 
-export {getOrganizationsQuery, addOrganizationMutation};
+const getOrganizationQuery = gql`
+  query($id: ID){
+    organization(OrganizationID: $id){
+      OrganizationID
+      Name
+      Address
+      Address2
+      City
+      State
+      Zip
+      Country
+      PhoneNumber
+      Email
+      YearFounded
+      StoryID
+      PictureID
+      VideoID
+      Description
+      Vision
+      Mission
+      Status
+      EnteredBy
+      DateEntered
+      ParentOrganizationID
+    }
+  }
+`
+
+export {getOrganizationsQuery, addOrganizationMutation, getOrganizationQuery};
