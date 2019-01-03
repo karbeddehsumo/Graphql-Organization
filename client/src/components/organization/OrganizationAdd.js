@@ -26,7 +26,7 @@ constructor(props){
       Status: '',
       EnteredBy: '',
       DateEntered: '',
-      ParentOrganizationID: ''
+      ParentID: ''
     };
 
   }
@@ -55,7 +55,7 @@ submitForm(e){
       Status: this.state.Status,
       EnteredBy: this.state.EnteredBy,
       DateEntered: this.state.DateEntered,
-      ParentOrganizationID: this.state.ParentOrganizationID
+      ParentID: this.state.ParentID
     },
     refetchQueries: [{query: getOrganizationsQuery}]
 
@@ -161,7 +161,7 @@ submitForm(e){
 
       <div className="field">
       <label>Parent Organizion ID</label>
-      <input type="text" onChange={(e) => this.setState({ParentOrganizationID: e.target.value})}/>
+      <input type="text" onChange={(e) => this.setState({ParentID: e.target.value})}/>
       </div>
 
       <button>+</button>

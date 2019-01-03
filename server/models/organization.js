@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const organizationSchema = new Schema({
-  organizationID: String,
   Name: String,
   Address: String,
   Address2: String,
@@ -22,7 +21,7 @@ const organizationSchema = new Schema({
   Status: String,
   EnteredBy: String,
   DateEntered: Date,
-  ParentOrganizationID: String
+  ParentID: String
 
 });
 

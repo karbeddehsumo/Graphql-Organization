@@ -3,7 +3,6 @@ import { gql } from 'apollo-boost';
 const getOrganizationsQuery = gql`
 {
    organizations{
-    OrganizationID
     Name
     Address
     Address2
@@ -23,7 +22,8 @@ const getOrganizationsQuery = gql`
     Status
     EnteredBy
     DateEntered
-    ParentOrganizationID
+    ParentID
+    id
   }
 }
 `
@@ -48,7 +48,7 @@ const addOrganizationMutation = gql`
        $Status: String!,
        $EnteredBy: String!,
        $DateEntered: String!,
-       $ParentOrganizationID: ID!
+       $ParentID: ID!
      ) {
         addOrganization(
          Name: $Name,
@@ -70,18 +70,16 @@ const addOrganizationMutation = gql`
          Status: $Status,
          EnteredBy: $EnteredBy,
          DateEntered: $DateEntered,
-         ParentOrganizationID: $ParentOrganizationID
+         ParentID: $ParentID
        ){
          Name
-         OrganizationID
        }
      }
 `
 
 const getOrganizationQuery = gql`
   query($id: ID){
-    organization(OrganizationID: $id){
-      OrganizationID
+    organization(id: $id){
       Name
       Address
       Address2
@@ -101,7 +99,8 @@ const getOrganizationQuery = gql`
       Status
       EnteredBy
       DateEntered
-      ParentOrganizationID
+      ParentID
+      id
     }
   }
 `

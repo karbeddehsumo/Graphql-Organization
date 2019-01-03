@@ -5,9 +5,16 @@ import  OrganizationDetail  from './OrganizationDetail';
 
 
 class OrganizationList extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      selected: null
+    }
+  }
   displayOrganization(){
     var data = this.props.data;
-
+    console.log("click data");
+    console.log(data);
     if(data.loading)
     {
       return(<div>Data is loading...</div>);
@@ -16,7 +23,7 @@ class OrganizationList extends Component {
     {
       return data.organizations.map(organization => {
         return (
-          <li key={organization.OrganizationID}>{organization.Name}</li>
+          <li key={organization.id} onClick={(e) => {this.setState({selected: organization.id})}}>{organization.Name}</li>
         );
       })
     }
@@ -27,7 +34,7 @@ class OrganizationList extends Component {
         <ul id="organization-list" >
           {this.displayOrganization()}
         </ul>
-        <OrganizationDetail/>
+        <OrganizationDetail SelectedOrganizationID={this.state.selected}/>
       </div>
     );
   }
