@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import {getOrganizationsQuery} from '../../queries/organization';
-import  OrganizationDetail  from './OrganizationDetail';
+import  OrganizationDetails  from './OrganizationDetails';
 
 
 class OrganizationList extends Component {
@@ -34,7 +34,7 @@ class OrganizationList extends Component {
         <ul id="organization-list" >
           {this.displayOrganization()}
         </ul>
-        <OrganizationDetail SelectedOrganizationID={this.state.selected}/>
+        <OrganizationDetails organizationid={this.state.selected}/>
       </div>
     );
   }

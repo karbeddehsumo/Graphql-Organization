@@ -31,7 +31,6 @@ constructor(props){
 
   }
 
-
 submitForm(e){
   e.preventDefault();
   this.props.addOrganizationMutation({
@@ -60,6 +59,16 @@ submitForm(e){
     refetchQueries: [{query: getOrganizationsQuery}]
 
   });
+}
+displayOrganizations(){
+  var data = this.props.getOrganizationsQuery;
+  if(data.loading){
+    return (<option>Loading organizations...</option>)
+  } else {
+     return data.organizations.map(organization => {
+    return (<option key={organization.id} value={organization.id}>{organization.Name}</option>);
+  })
+  }
 }
   render() {
     return (
@@ -160,8 +169,11 @@ submitForm(e){
       </div>
 
       <div className="field">
-      <label>Parent Organizion ID</label>
-      <input type="text" onChange={(e) => this.setState({ParentID: e.target.value})}/>
+      <label>Parent</label>
+      <select>
+      <option>Select Parent Organization</option>
+      {this.displayOrganizations()}
+      </select>
       </div>
 
       <button>+</button>
@@ -171,7 +183,8 @@ submitForm(e){
 }
 
 export default compose(
-  graphql(addOrganizationMutation, {name: "addOrganizationMutation"})
+  graphql(addOrganizationMutation, {name: "addOrganizationMutation"}),
+    graphql(getOrganizationsQuery, {name: "getOrganizationsQuery"})
 )(OrganizationAdd);
 
 //export default graphql(addOrganizationMutation)(OrganizationAdd);

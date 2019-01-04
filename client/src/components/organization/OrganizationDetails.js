@@ -3,11 +3,9 @@ import { graphql } from 'react-apollo';
 import {getOrganizationQuery} from '../../queries/organization';
 
 
-class OrganizationDetail extends Component {
+class OrganizationDetails extends Component {
   DisplayOrganizationDetails(){
     const {organization} = this.props.data;
-    console.log("here is the data")
-    console.log(this.props.data);
     if(organization){
       return(
         <div>
@@ -30,4 +28,12 @@ class OrganizationDetail extends Component {
   }
 }
 
-export default graphql(getOrganizationQuery)(OrganizationDetail);
+export default graphql(getOrganizationQuery, {
+  options: (props) => {
+    return {
+      variables: {
+        id: props.organizationid
+      }
+    }
+  }
+})(OrganizationDetails);
