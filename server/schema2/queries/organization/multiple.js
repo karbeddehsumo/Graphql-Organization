@@ -1,8 +1,8 @@
-inport {
+import {
     GraphQLList
 } from 'graphql'
 
-import { organizationType} from '../../type/organization';
+import { organizationType} from '../../types/organization';
 import organizationModel from '../../../models/organization';
 
 export default {

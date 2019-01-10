@@ -2,7 +2,7 @@ import {
    GraphQLNonNull
 } from 'graphql';
 
-import {organizationType, organizationInputType } from '../../type/organization';
+import {organizationType, organizationInputType } from '../../types/organization';
 import OrganizationModel from '../../../models/organization';
 
 export default {
@@ -15,7 +15,7 @@ export default {
   },
 
   resolve(root, params) {
-      const oModel = new OrganizationModel(param.data);
+      const oModel = new OrganizationModel(params.data);
       const newOrganization = oModel.save();
       if(!newOrganization) {
         throw new Error('Error adding organization');

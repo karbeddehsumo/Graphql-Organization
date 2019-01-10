@@ -3,7 +3,7 @@ import {
   GraphQLNonNull,
 } from 'graphql';
 
-import { organizationType } from '../../types/organizanametion';
+import { organizationType } from '../../types/organization';
 import organizationModel from '../../models/organization';
 
 export default {
@@ -14,7 +14,7 @@ export default {
                type: new GraphQLNonNull(GraphQLID)
             }
           },
-        resolve(root, param) {
-          return organizationModel.findById(param.id).exec();
+        resolve(root, params) {
+          return organizationModel.findById(params.id).exec();
         }
 }
