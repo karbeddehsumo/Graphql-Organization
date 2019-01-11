@@ -1,5 +1,5 @@
-import organizationMutation from './organization';
+const organizationMutation = require('./organization');
 
-export default {
+module.export = new {
   ...organizationMutation
-}
+};

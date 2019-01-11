@@ -1,3 +1,5 @@
+const graphql = require('graphql');
+
 import {
   GraphQLObjectType,
   GraphQLInputObjectType,

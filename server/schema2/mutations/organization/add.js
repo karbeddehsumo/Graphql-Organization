@@ -1,6 +1,8 @@
-import {
+const graphql = require('graphql');
+
+const {
    GraphQLNonNull
-} from 'graphql';
+} = graphql;
 
 import {organizationType, organizationInputType } from '../../types/organization';
 import OrganizationModel from '../../../models/organization';
