@@ -4,7 +4,7 @@ const addOrganization = require('./add');
 const removeOrganization = require('./remove');
 const updateOrganization = require('./update');
 
-export default {
+module.export = new  {
   addOrganization,
   removeOrganization,
   updateOrganization

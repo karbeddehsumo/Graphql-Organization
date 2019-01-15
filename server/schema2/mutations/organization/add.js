@@ -4,10 +4,10 @@ const {
    GraphQLNonNull
 } = graphql;
 
-import {organizationType, organizationInputType } from '../../types/organization';
-import OrganizationModel from '../../../models/organization';
+const {organizationType, organizationInputType } = require('../../types/organization');
+const OrganizationModel = require( '../../../models/organization');
 
-export default {
+const add = new GraphQLObjectType  ({
   type: organizationType,
   args: {
         data: {
@@ -25,4 +25,4 @@ export default {
 
       return newOrganization
   }
-}
+});

@@ -1,5 +1,5 @@
 import organization from './organization';
 
-export default {
+export default `{
      ...organization
-}
+}`

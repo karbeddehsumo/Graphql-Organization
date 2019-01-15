@@ -7,7 +7,7 @@ const {
 import { organizationType} from '../../types/organization';
 import organizationModel from '../../../models/organization';
 
-export default {
+export default `{
     type: new GraphQLList(organizationType);
     resolve() {
         const organizations = organizationModel.find().exec();
@@ -16,4 +16,4 @@ export default {
         }
         return organizations
     }
-}
+}`

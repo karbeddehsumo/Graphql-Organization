@@ -8,7 +8,7 @@ const {
 import { organizationType } from '../../types/organization';
 import organizationModel from '../../models/organization';
 
-export default {
+export default `{
     type: organizationType,
     args: {
         id: {
@@ -19,4 +19,4 @@ export default {
         resolve(root, params) {
           return organizationModel.findById(params.id).exec();
         }
-}
+}`

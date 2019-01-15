@@ -1,6 +1,6 @@
 const graphql = require('graphql');
 
-import {
+const {
   GraphQLObjectType,
   GraphQLInputObjectType,
   GraphQLNonNull,
@@ -8,12 +8,12 @@ import {
   GraphQLInt,
   GraphQLID,
   GraphQLList
-} from 'graphql';
+} = graphql;
 
-import OrganizationModel from '../../models/organization';
-import { organizationType } from './organization';
+const OrganizationModel = require('../../models/organization');
+//const { organizationType } = require('./organization');
 
-export const organizationType = new GraphQLObjectType({
+ const organizationType = new GraphQLObjectType({
     name: 'Organization',
     fields: () => ({
               _id: {type: new GraphQLNonNull(GraphQLID)},
@@ -38,9 +38,9 @@ export const organizationType = new GraphQLObjectType({
               DateEntered: {type: new GraphQLNonNull(GraphQLString)},
               ParentID: {type: GraphQLID}
     })
-})
+});
 
-export const organizationInputType = new GraphInputObjectType({
+ const organizationInputType = new GraphQLInputObjectType({
     name: 'OrganizationInput',
     fields: () => ({
       Name: { type: GraphQLString},
@@ -64,4 +64,4 @@ export const organizationInputType = new GraphInputObjectType({
       DateEntered: {type: GraphQLString},
       ParentID: {type: GraphQLID}
     })
-})
+});

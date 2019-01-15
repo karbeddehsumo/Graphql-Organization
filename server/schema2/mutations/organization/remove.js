@@ -8,7 +8,7 @@ const {
 import { organizationType } from '../../types/organization';
 import OrganizationModel from '../../../models/organization';
 
-export default {
+export default `{
     type: organizationType,
     args: {
           id: {
@@ -24,3 +24,4 @@ export default {
         return removeorganization;
     }
 }
+`
