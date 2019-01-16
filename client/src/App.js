@@ -5,6 +5,7 @@ import { ApolloProvider } from 'react-apollo';
 //components
 import OrganizationList from './components/organization/OrganizationList';
 import OrganizationAdd from  './components/organization/OrganizationAdd';
+import MemberAdd from  './components/member/MemberAdd';
 
 //apollo client setup
 const client = new ApolloClient({
@@ -19,6 +20,7 @@ class App extends Component {
         <h1>My Organization</h1>
         <OrganizationList />
         <OrganizationAdd />
+        <MemberAdd />
       </div>
       </ApolloProvider>
     );

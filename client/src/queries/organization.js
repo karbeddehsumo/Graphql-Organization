@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 const getOrganizationsQuery = gql`
 {
-   multiple{
+   organizations{
     Name
     Address
     Address2
@@ -79,7 +79,7 @@ const addOrganizationMutation = gql`
 
 const getOrganizationQuery = gql`
   query($id: ID){
-    single(id: $id){
+    organization(id: $id){
       Name
       Address
       Address2

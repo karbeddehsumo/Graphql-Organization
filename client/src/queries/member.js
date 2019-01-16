@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boots';
+import { gql } from 'apollo-boost';
 
 const getMembersQuery = gql`
 {
