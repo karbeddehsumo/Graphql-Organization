@@ -27,9 +27,8 @@ const getMembersQuery = gql`
 `
 
 const getMemberQuery = gql`
-{
-  query GetMember($memberID: ID){
-      member(MemberID: $memberID){
+  query ($id: ID){
+      member(id: $id){
         MemberID
         FamilyID
         OrganizationID
@@ -60,13 +59,11 @@ const getMemberQuery = gql`
           Zip
         }
       }
-  }
 }
 `
 
 const addMemberMutation = gql`
   mutation(
-    $MemberID: String!,
     $FamilyID: ID!,
     $OrganizationID: ID!,
     $FirstName: String!,
@@ -87,7 +84,6 @@ const addMemberMutation = gql`
     $DateEntered: String!
   ){
     addMember(
-      MemberID: $MemberID,
       FamilyID: $FamilyID,
       OrganizationID: $OrganizationID,
       FirstName: $FirstName,
@@ -112,4 +108,6 @@ const addMemberMutation = gql`
     }
 }
 `
+
+
 export {getMembersQuery, getMemberQuery, addMemberMutation};

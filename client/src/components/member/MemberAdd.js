@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
-import { addMemberMutation, getMembersQuery } from '../../queries/member';
+import { addMemberMutation, getMembersQuery} from '../../queries/member';
 
 
 class MemberAdd extends Component {
@@ -55,17 +55,7 @@ class MemberAdd extends Component {
       });
     }
 
-/*    DisplayMembers(){
-      var data = this.props.getMembersQuery;
-      if(data.loading){
-        return (<option>Loading members...</option>)
-      }else {
-        return (data.members.map(member => {
-           return (<option key={member.id} value={member.id}>{member.LastName}, {member.FirstName} {member.MiddleName}</option>);
-        })
-      }
-    }
-*/
+
     render(){
         return(
             <form id="add-member" onSubmit={this.submitForm.bind(this)}>
@@ -163,6 +153,7 @@ class MemberAdd extends Component {
             </form>
         );
     }
+
 }
 
 
