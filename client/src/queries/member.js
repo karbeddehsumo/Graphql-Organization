@@ -3,7 +3,6 @@ import { gql } from 'apollo-boost';
 const getMembersQuery = gql`
 {
   members{
-    MemberID
     FamilyID
     OrganizationID
     FirstName
@@ -22,6 +21,7 @@ const getMembersQuery = gql`
     Status
     EnteredBy
     DateEntered
+    id
   }
 }
 `
@@ -29,7 +29,6 @@ const getMembersQuery = gql`
 const getMemberQuery = gql`
   query ($id: ID){
       member(id: $id){
-        MemberID
         FamilyID
         OrganizationID
         FirstName
@@ -48,6 +47,7 @@ const getMemberQuery = gql`
         Status
         EnteredBy
         DateEntered
+        id
         family {
           familyID
           LastName

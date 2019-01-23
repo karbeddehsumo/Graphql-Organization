@@ -3,7 +3,6 @@ import { gql } from 'apollo-boost';
 const getFamiliesQuery = gql`
 {
   families{
-    FamilyID
     OrganizationID
     FamilyName
     Address
@@ -14,15 +13,15 @@ const getFamiliesQuery = gql`
     Status
     EnteredBy
     DateEntered
+    id
   }
 }
 `
 
 const getFamilyQuery = gql`
 {
-  query get Family($familyID: ID){
-      family(FamilyID: $familyID) {
-        FamilyID
+  query get Family($id: ID){
+      family(id: $id) {
         OrganizationID
         FamilyName
         Address
@@ -33,6 +32,7 @@ const getFamilyQuery = gql`
         Status
         EnteredBy
         DateEntered
+        id
         members{
           FirstName
           MiddleName
@@ -51,7 +51,6 @@ const getFamilyQuery = gql`
 
 const addFamilyMutation = gql`
   mutation(
-    $FamilyID: ID!,
     $OrganizationID: ID!,
     $FamilyName: String!,
     $Address: String!,
@@ -64,7 +63,6 @@ const addFamilyMutation = gql`
     $DateEntered: String!
   ){
     addFamily(
-      FamilyID: $FamilyID,
       OrganizationID: $OrganizationID,
       FamilyName: $FamilyName,
       Address: $Address,

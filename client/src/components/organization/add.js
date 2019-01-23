@@ -186,5 +186,3 @@ export default compose(
   graphql(addOrganizationMutation, {name: "addOrganizationMutation"}),
     graphql(getOrganizationsQuery, {name: "getOrganizationsQuery"})
 )(OrganizationAdd);
-
-//export default graphql(addOrganizationMutation)(OrganizationAdd);

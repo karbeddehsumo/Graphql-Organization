@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import {getOrganizationsQuery} from '../../queries/organization';
-import  OrganizationDetails  from './OrganizationDetails';
-
+import  OrganizationDetails  from './details';
 
 class OrganizationList extends Component {
   constructor(props){
@@ -40,4 +39,5 @@ class OrganizationList extends Component {
   }
 }
 
-export default graphql(getOrganizationsQuery)(OrganizationList);
+OrganizationList = graphql(getOrganizationsQuery )(OrganizationList)
+export default OrganizationList;
