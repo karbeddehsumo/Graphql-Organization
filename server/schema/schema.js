@@ -64,7 +64,7 @@ const MemberType = new GraphQLObjectType({
      Status: {type: GraphQLString},
      EnteredBy: {type: GraphQLString},
      DateEntered: {type: GraphQLString},
-     organization: {
+    /* organization: {
        type: OrganizationType,
        resolve(parent, args){
          return Organization.findById(parent.id);
@@ -76,7 +76,7 @@ const MemberType = new GraphQLObjectType({
          return Family.findById(parent.id);
        }
      }
-
+*/
    })
 });
 
@@ -100,7 +100,6 @@ const FamilyType = new GraphQLObjectType({
         return Member.find({FamiyID: parent.id});
       }
     }
-
   })
 });
 
@@ -214,7 +213,6 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args){
         let family = new Family ({
-          FamilyID: args.FamilyID,
           OrganizationID: args.OrganizationID,
           FamilyName: args.FamilyName,
           Address: args.Address,

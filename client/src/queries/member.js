@@ -27,7 +27,7 @@ const getMembersQuery = gql`
 `
 
 const getMemberQuery = gql`
-  query ($id: ID){
+  query($id: ID){
       member(id: $id){
         FamilyID
         OrganizationID
@@ -48,16 +48,6 @@ const getMemberQuery = gql`
         EnteredBy
         DateEntered
         id
-        family {
-          familyID
-          LastName
-          Address
-          Address2
-          Street
-          City
-          state
-          Zip
-        }
       }
 }
 `
@@ -99,7 +89,7 @@ const addMemberMutation = gql`
       PhoneNumberProviderID: $PhoneNumberProviderID,
       Email: $Email,
       PictureID: $PictureID,
-      $Status: $Status,
+      Status: $Status,
       EnteredBy: $EnteredBy,
       DateEntered: $DateEntered
     ){

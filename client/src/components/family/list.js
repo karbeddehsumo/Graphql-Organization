@@ -20,7 +20,7 @@ class FamilyList extends Component {
     }
     else
     {
-      return data.organizations.map(family => {
+      return data.families.map(family => {
         return (
           <li key={family.id} onClick={(e) => {this.setState({selected: family.id})}}>{family.FamilyName}</li>
         );

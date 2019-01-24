@@ -12,6 +12,10 @@ import FamilyList from './components/family/list';
 import FamilyAdd from  './components/family/add';
 import FamilyHome from './components/family/index';
 
+import MemberList from './components/member/list';
+import MemberAdd from './components/member/add';
+import MemberHome from './components/member/index';
+
 
 //apollo client setup
 const client = new ApolloClient({
@@ -33,6 +37,10 @@ class App extends Component {
           <Route exact path="/family" component={FamilyHome} />
           <Route exact path="/family/list" component={FamilyList} />
           <Route exact path="/family/create" component={FamilyAdd} />
+
+          <Route exact path="/member" component={MemberHome} />
+          <Route exact path="/member/list" component={MemberList} />
+          <Route exact path="/member/create" component={MemberAdd} />
 
         </Switch>
       </div>

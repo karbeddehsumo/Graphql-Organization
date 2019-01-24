@@ -19,8 +19,7 @@ const getFamiliesQuery = gql`
 `
 
 const getFamilyQuery = gql`
-{
-  query get Family($id: ID){
+  query($id: ID){
       family(id: $id) {
         OrganizationID
         FamilyName
@@ -33,18 +32,6 @@ const getFamilyQuery = gql`
         EnteredBy
         DateEntered
         id
-        members{
-          FirstName
-          MiddleName
-          LastName
-          Suffix
-          DOB
-          Gender
-          Title
-          PhoneNumber
-          Email
-        }
-      }
   }
 }
 `
@@ -74,7 +61,6 @@ const addFamilyMutation = gql`
       EnteredBy: $EnteredBy,
       DateEntered: $DateEntered
     )
-  }
   {
     FamilyName
     DateEntered
