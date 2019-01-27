@@ -12,8 +12,6 @@ class OrganizationList extends Component {
   }
   displayOrganization(){
     var data = this.props.data;
-    console.log("click data");
-    console.log(data);
     if(data.loading)
     {
       return(<div>Data is loading...</div>);

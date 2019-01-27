@@ -8,7 +8,6 @@ class FamilyAdd extends Component {
 constructor(props){
   super(props);
     this.state = {
-      OrganizationID: '',
       FamilyName: '',
       Address: '',
       Address2: '',
@@ -17,26 +16,28 @@ constructor(props){
       Zip: '',
       Status: '',
       EnteredBy: '',
-      DateEntered: ''
+      DateEntered: '',
+      OrganizationID: ''
     };
 
   }
 
 submitForm(e){
   e.preventDefault();
+  console.log("looking for you!");
+  console.log(this.state);
   this.props.addFamilyMutation({
     variables:{
-      Name: this.state.FamilyName,
-      OrganizationID: this.state.OrganizationID,
       FamilyName: this.state.FamilyName,
       Address: this.state.Address,
       Address2: this.state.Address2,
-      City: this.sate.City,
+      City: this.state.City,
       State: this.state.State,
       Zip: this.setState.Zip,
       Status: this.state.Status,
       EnteredBy: this.state.$EnteredBy,
-      DateEntered: this.state.DateEntered
+      DateEntered: this.state.DateEntered,
+      OrganizationID: this.state.OrganizationID
     },
     refetchQueries: [{query: getFamiliesQuery}]
 

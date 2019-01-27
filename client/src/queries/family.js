@@ -38,7 +38,6 @@ const getFamilyQuery = gql`
 
 const addFamilyMutation = gql`
   mutation(
-    $OrganizationID: ID!,
     $FamilyName: String!,
     $Address: String!,
     $Address2: String!,
@@ -47,10 +46,10 @@ const addFamilyMutation = gql`
     $Zip: String!,
     $Status: String!,
     $EnteredBy: String!,
-    $DateEntered: String!
+    $DateEntered: String!,
+    $OrganizationID: ID!,
   ){
     addFamily(
-      OrganizationID: $OrganizationID,
       FamilyName: $FamilyName,
       Address: $Address,
       Address2: $Address2,
@@ -59,7 +58,8 @@ const addFamilyMutation = gql`
       Zip: $Zip,
       Status: $Status,
       EnteredBy: $EnteredBy,
-      DateEntered: $DateEntered
+      DateEntered: $DateEntered,
+      OrganizationID: $OrganizationID,
     )
   {
     FamilyName

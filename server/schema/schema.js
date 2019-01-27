@@ -200,7 +200,6 @@ const Mutation = new GraphQLObjectType({
     addFamily: {
       type: FamilyType,
       args: {
-        OrganizationID: {type: GraphQLID},
         FamilyName: {type: GraphQLString},
         Address: {type: GraphQLString},
         Address2: {type: GraphQLString},
@@ -209,11 +208,11 @@ const Mutation = new GraphQLObjectType({
         Zip: {type: GraphQLString},
         Status: {type: GraphQLString},
         EnteredBy: {type: GraphQLString},
-        DateEntered: {type: GraphQLString}
+        DateEntered: {type: GraphQLString},
+        OrganizationID: {type: GraphQLID}
       },
       resolve(parent, args){
-        let family = new Family ({
-          OrganizationID: args.OrganizationID,
+        let family = new Family ({        
           FamilyName: args.FamilyName,
           Address: args.Address,
           Address2: args.Address2,
@@ -222,7 +221,8 @@ const Mutation = new GraphQLObjectType({
           Zip: args.Zip,
           Status: args.Status,
           EnteredBy: args.EnteredBy,
-          DateEntered: args.DateEntered
+          DateEntered: args.DateEntered,
+          OrganizationID: args.OrganizationID
         });
         return family.save();
       }
