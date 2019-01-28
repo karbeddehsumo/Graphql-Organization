@@ -64,7 +64,7 @@ const MemberType = new GraphQLObjectType({
      Status: {type: GraphQLString},
      EnteredBy: {type: GraphQLString},
      DateEntered: {type: GraphQLString},
-    /* organization: {
+     organization: {
        type: OrganizationType,
        resolve(parent, args){
          return Organization.findById(parent.id);
@@ -76,7 +76,6 @@ const MemberType = new GraphQLObjectType({
          return Family.findById(parent.id);
        }
      }
-*/
    })
 });
 
@@ -84,7 +83,6 @@ const FamilyType = new GraphQLObjectType({
   name: 'famiy',
   fields: () => ({
     id: {type: GraphQLID},
-    OrganizationID: {type: GraphQLID},
     FamilyName: {type: GraphQLString},
     Address: {type: GraphQLString},
     Address2: {type: GraphQLString},
@@ -208,11 +206,10 @@ const Mutation = new GraphQLObjectType({
         Zip: {type: GraphQLString},
         Status: {type: GraphQLString},
         EnteredBy: {type: GraphQLString},
-        DateEntered: {type: GraphQLString},
-        OrganizationID: {type: GraphQLID}
+        DateEntered: {type: GraphQLString}
       },
       resolve(parent, args){
-        let family = new Family ({        
+        let family = new Family ({
           FamilyName: args.FamilyName,
           Address: args.Address,
           Address2: args.Address2,
@@ -221,8 +218,7 @@ const Mutation = new GraphQLObjectType({
           Zip: args.Zip,
           Status: args.Status,
           EnteredBy: args.EnteredBy,
-          DateEntered: args.DateEntered,
-          OrganizationID: args.OrganizationID
+          DateEntered: args.DateEntered
         });
         return family.save();
       }

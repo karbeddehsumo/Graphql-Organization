@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import {addFamilyMutation, getFamiliesQuery } from '../../queries/family';
-import { getOrganizationsQuery } from '../../queries/organization';
 
 class FamilyAdd extends Component {
 
@@ -16,8 +15,7 @@ constructor(props){
       Zip: '',
       Status: '',
       EnteredBy: '',
-      DateEntered: '',
-      OrganizationID: ''
+      DateEntered: ''
     };
 
   }
@@ -33,26 +31,16 @@ submitForm(e){
       Address2: this.state.Address2,
       City: this.state.City,
       State: this.state.State,
-      Zip: this.setState.Zip,
+      Zip: this.state.Zip,
       Status: this.state.Status,
-      EnteredBy: this.state.$EnteredBy,
-      DateEntered: this.state.DateEntered,
-      OrganizationID: this.state.OrganizationID
+      EnteredBy: this.state.EnteredBy,
+      DateEntered: this.state.DateEntered
     },
     refetchQueries: [{query: getFamiliesQuery}]
 
   });
 }
-displayOrganizations(){
-  var data = this.props.getOrganizationsQuery;
-  if(data.loading){
-    return (<option>Loading organizations...</option>)
-  } else {
-     return data.organizations.map(organization => {
-    return (<option key={organization.id} value={organization.id}>{organization.Name}</option>);
-  })
-  }
-}
+
   render() {
     return (
       <form id="add-family" onSubmit={this.submitForm.bind(this)}>
@@ -102,14 +90,6 @@ displayOrganizations(){
       <input type="text" onChange={(e) => this.setState({DateEntered: e.target.value})}/>
       </div>
 
-      <div className="field">
-      <label>Parent</label>
-      <select>
-      <option>Select Organization</option>
-      {this.displayOrganizations()}
-      </select>
-      </div>
-
       <button>+</button>
       </form>
     );
@@ -118,6 +98,5 @@ displayOrganizations(){
 
 export default compose(
   graphql(addFamilyMutation, {name: "addFamilyMutation"}),
-graphql(getFamiliesQuery, {name: "getFamiliesQuery"}),
-    graphql(getOrganizationsQuery, {name: "getOrganizationsQuery"})
+graphql(getFamiliesQuery, {name: "getFamiliesQuery"})
 )(FamilyAdd);

@@ -170,7 +170,7 @@ displayOrganizations(){
 
       <div className="field">
       <label>Parent</label>
-      <select>
+      <select onChange={(e) => this.setState({OrganizationID: e.target.value})}>
       <option>Select Parent Organization</option>
       {this.displayOrganizations()}
       </select>

@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const familySchema = new Schema({
-  OrganizationID: String,
   FamilyName: String,
   Address: String,
   Address2: String,

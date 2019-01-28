@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 import { addMemberMutation, getMembersQuery} from '../../queries/member';
+import { getOrganizationsQuery } from '../../queries/organization';
+import { getFamiliesQuery } from '../../queries/family';
 
 
 class MemberAdd extends Component {
@@ -53,6 +55,26 @@ class MemberAdd extends Component {
           },
           refetchQueries: [{query: getMembersQuery}]
       });
+}
+      displayOrganizations(){
+        var data = this.props.getOrganizationsQuery;
+        if(data.loading){
+          return (<option>Loading organizations...</option>)
+        } else {
+           return data.organizations.map(organization => {
+          return (<option key={organization.id} value={organization.id}>{organization.Name}</option>);
+        })
+        }
+}
+        displayFamilies(){
+          var data = this.props.getFamiliesQuery;
+          if(data.loading){
+            return (<option>Loading Families...</option>)
+          } else {
+             return data.families.map(family => {
+            return (<option key={family.id} value={family.id}>{family.FamilyName}</option>);
+          })
+          }
     }
 
 
@@ -61,13 +83,11 @@ class MemberAdd extends Component {
             <form id="add-member" onSubmit={this.submitForm.bind(this)}>
 
             <div className="field">
-            <label>Family</label>
-            <input type="text" onChange={(e) => this.setState({FamilyID: e.target.value})}/>
-            </div>
-
-            <div className="field">
-            <label>Organization</label>
-            <input type="text" onChange={(e) => this.setState({OrganizationID: e.target.value})}/>
+            <label>Family Name</label>
+            <select onChange={(e) => this.setState({FamilyID: e.target.value})}>
+            <option>Select Organization</option>
+            {this.displayFamilies()}
+            </select>
             </div>
 
             <div className="field">
@@ -150,6 +170,16 @@ class MemberAdd extends Component {
             <input type="text" onChange={(e) => this.setState({DateEntered: e.target.value})}/>
             </div>
 
+            <div className="field">
+            <label>Organization</label>
+            <select onChange={(e) => this.setState({OrganizationID: e.target.value})}>
+            <option>Select Organization</option>
+            {this.displayOrganizations()}
+            </select>
+            </div>
+
+            <button>+</button>
+            
             </form>
         );
     }
@@ -159,5 +189,7 @@ class MemberAdd extends Component {
 
 export default compose(
      graphql(addMemberMutation, {name: "addMemberMutation"}),
-     graphql(getMembersQuery, {name: "getMembersQuery"})
+     graphql(getMembersQuery, {name: "getMembersQuery"}),
+     graphql(getOrganizationsQuery, {name: "getOrganizationsQuery"}),
+     graphql(getFamiliesQuery, {name: "getFamiliesQuery"})
 )(MemberAdd);
