@@ -18,26 +18,26 @@ const { GraphQLObjectType,
 const OrganizationType = new GraphQLObjectType({
    name: 'Organization',
    fields: () => ({
-     id: { type: GraphQLID},
-     Name: { type: GraphQLString},
+     id: { type: new GraphQLNonNull(GraphQLID)},
+     Name: { type: new GraphQLNonNull(GraphQLString)},
      Address: {type: GraphQLString},
      Address2: {type: GraphQLString},
-     City: {type: GraphQLString},
+     City: {type: new GraphQLNonNull(GraphQLString)},
      State: {type: GraphQLString},
      Zip: {type: GraphQLString},
-     Country: {type: GraphQLString},
+     Country: {type: new GraphQLNonNull(GraphQLString)},
      PhoneNumber: {type: GraphQLString},
-     Email: {type: GraphQLString},
-     YearFounded: {type: GraphQLString},
+     Email: {type: new GraphQLNonNull(GraphQLString)},
+     YearFounded: {type: new GraphQLNonNull(GraphQLString)},
      StoryID: {type: GraphQLID},
      PictureID: {type: GraphQLID},
      VideoID: {type: GraphQLID},
      Description: {type: GraphQLString},
      Vision: {type: GraphQLString},
      Mission: {type: GraphQLString},
-     Status: {type: GraphQLString},
-     EnteredBy: {type: GraphQLString},
-     DateEntered: {type: GraphQLString},
+     Status: {type: new GraphQLNonNull(GraphQLString)},
+     EnteredBy: {type: new GraphQLNonNull(GraphQLString)},
+     DateEntered: {type: new GraphQLNonNull(GraphQLString)},
      ParentID: {type: GraphQLID}
    })
 });
@@ -45,25 +45,25 @@ const OrganizationType = new GraphQLObjectType({
 const MemberType = new GraphQLObjectType({
    name: 'member',
    fields: () => ({
-     id: {type: GraphQLID},
-     FamilyID: {type: GraphQLID},
-     OrganizationID: {type: GraphQLID},
-     FirstName: {type: GraphQLString},
+     id: {type: new GraphQLNonNull(GraphQLID)},
+     FamilyID: {type: new GraphQLNonNull(GraphQLID)},
+     OrganizationID: {type: new GraphQLNonNull(GraphQLID)},
+     FirstName: {type: new GraphQLNonNull(GraphQLString)},
      MiddleName: {type: GraphQLString},
-     LastName: {type: GraphQLString},
+     LastName: {type: new GraphQLNonNull(GraphQLString)},
      Suffix: {type: GraphQLString},
      DOB: {type: GraphQLString},
-     Gender: {type: GraphQLString},
+     Gender: {type: new GraphQLNonNull(GraphQLString)},
      MembershipDate: {type: GraphQLString},
      Title: {type: GraphQLString},
      ContactTypeID: {type: GraphQLID},
-     PhoneNumber: {type: GraphQLString},
+     PhoneNumber: {type: new GraphQLNonNull(GraphQLString)},
      PhoneNumberProviderID: {type: GraphQLID},
-     Email: {type: GraphQLString},
+     Email: {type: new GraphQLNonNull(GraphQLString)},
      PictureID: {type: GraphQLID},
      Status: {type: GraphQLString},
-     EnteredBy: {type: GraphQLString},
-     DateEntered: {type: GraphQLString},
+     EnteredBy: {type: new GraphQLNonNull(GraphQLString)},
+     DateEntered: {type: new GraphQLNonNull(GraphQLString)},
      organization: {
        type: OrganizationType,
        resolve(parent, args){
@@ -82,16 +82,16 @@ const MemberType = new GraphQLObjectType({
 const FamilyType = new GraphQLObjectType({
   name: 'famiy',
   fields: () => ({
-    id: {type: GraphQLID},
-    FamilyName: {type: GraphQLString},
+    id: {type: new GraphQLNonNull(GraphQLID)},
+    FamilyName: {type: new GraphQLNonNull(GraphQLString)},
     Address: {type: GraphQLString},
     Address2: {type: GraphQLString},
-    City: {type: GraphQLString},
+    City: {type: new GraphQLNonNull(GraphQLString)},
     State: {type: GraphQLString},
     Zip: {type: GraphQLString},
-    Status: {type: GraphQLString},
-    EnteredBy: {type: GraphQLString},
-    DateEntered: {type: GraphQLString},
+    Status: {type: new GraphQLNonNull(GraphQLString)},
+    EnteredBy: {type: new GraphQLNonNull(GraphQLString)},
+    DateEntered: {type: new GraphQLNonNull(GraphQLString)},
     members: {
       type: GraphQLList(MemberType),
       resolve(parent, args){
@@ -152,24 +152,24 @@ const Mutation = new GraphQLObjectType({
     addMember: {
       type: MemberType,
       args: {
-          FamilyID: {type: GraphQLID},
-          OrganizationID: {type: GraphQLID},
-          FirstName: {type: GraphQLString},
-          MiddleName: {type: GraphQLString},
-          LastName: {type: GraphQLString},
-          Suffix: {type: GraphQLString},
-          DOB: {type: GraphQLString},
-          Gender: {type: GraphQLString},
-          MembershipDate: {type: GraphQLString},
-          Title: {type: GraphQLString},
-          ContactTypeID: {type: GraphQLID},
-          PhoneNumber: {type: GraphQLString},
-          PhoneNumberProviderID: {type: GraphQLID},
-          Email: {type: GraphQLString},
-          PictureID: {type: GraphQLID},
-          Status: {type: GraphQLString},
-          EnteredBy: {type: GraphQLString},
-          DateEntered: {type: GraphQLString}
+        FamilyID: {type: new GraphQLNonNull(GraphQLID)},
+        OrganizationID: {type: new GraphQLNonNull(GraphQLID)},
+        FirstName: {type: new GraphQLNonNull(GraphQLString)},
+        MiddleName: {type: GraphQLString},
+        LastName: {type: new GraphQLNonNull(GraphQLString)},
+        Suffix: {type: GraphQLString},
+        DOB: {type: GraphQLString},
+        Gender: {type: new GraphQLNonNull(GraphQLString)},
+        MembershipDate: {type: GraphQLString},
+        Title: {type: GraphQLString},
+        ContactTypeID: {type: GraphQLID},
+        PhoneNumber: {type: new GraphQLNonNull(GraphQLString)},
+        PhoneNumberProviderID: {type: GraphQLID},
+        Email: {type: new GraphQLNonNull(GraphQLString)},
+        PictureID: {type: GraphQLID},
+        Status: {type: GraphQLString},
+        EnteredBy: {type: new GraphQLNonNull(GraphQLString)},
+        DateEntered: {type: new GraphQLNonNull(GraphQLString)}
       },
       resolve(parent, args){
         let member = new Member({
@@ -198,15 +198,15 @@ const Mutation = new GraphQLObjectType({
     addFamily: {
       type: FamilyType,
       args: {
-        FamilyName: {type: GraphQLString},
+        FamilyName: {type: new GraphQLNonNull(GraphQLString)},
         Address: {type: GraphQLString},
         Address2: {type: GraphQLString},
-        City: {type: GraphQLString},
+        City: {type: new GraphQLNonNull(GraphQLString)},
         State: {type: GraphQLString},
         Zip: {type: GraphQLString},
-        Status: {type: GraphQLString},
-        EnteredBy: {type: GraphQLString},
-        DateEntered: {type: GraphQLString}
+        Status: {type: new GraphQLNonNull(GraphQLString)},
+        EnteredBy: {type: new GraphQLNonNull(GraphQLString)},
+        DateEntered: {type: new GraphQLNonNull(GraphQLString)}
       },
       resolve(parent, args){
         let family = new Family ({
@@ -226,25 +226,25 @@ const Mutation = new GraphQLObjectType({
     addOrganization: {
       type: OrganizationType,
       args: {
-        Name: { type: GraphQLString},
+        Name: { type: new GraphQLNonNull(GraphQLString)},
         Address: {type: GraphQLString},
         Address2: {type: GraphQLString},
-        City: {type: GraphQLString},
+        City: {type: new GraphQLNonNull(GraphQLString)},
         State: {type: GraphQLString},
         Zip: {type: GraphQLString},
-        Country: {type: GraphQLString},
+        Country: {type: new GraphQLNonNull(GraphQLString)},
         PhoneNumber: {type: GraphQLString},
-        Email: {type: GraphQLString},
-        YearFounded: {type: GraphQLString},
+        Email: {type: new GraphQLNonNull(GraphQLString)},
+        YearFounded: {type: new GraphQLNonNull(GraphQLString)},
         StoryID: {type: GraphQLID},
         PictureID: {type: GraphQLID},
         VideoID: {type: GraphQLID},
         Description: {type: GraphQLString},
         Vision: {type: GraphQLString},
         Mission: {type: GraphQLString},
-        Status: {type: GraphQLString},
-        EnteredBy: {type: GraphQLString},
-        DateEntered: {type: GraphQLString},
+        Status: {type: new GraphQLNonNull(GraphQLString)},
+        EnteredBy: {type: new GraphQLNonNull(GraphQLString)},
+        DateEntered: {type: new GraphQLNonNull(GraphQLString)},
         ParentID: {type: GraphQLID}
       },
       resolve(parent, args){
@@ -271,6 +271,78 @@ const Mutation = new GraphQLObjectType({
           ParentID: args.ParentID
         });
         return organization.save();
+      }
+    },
+    updateMember: {
+      type: MemberType,
+      args: {
+        id: { type: GraphQLID },
+          FamilyID: {type: new GraphQLNonNull(GraphQLID)},
+        OrganizationID: {type: new GraphQLNonNull(GraphQLID)},
+        FirstName: {type: new GraphQLNonNull(GraphQLString)},
+        MiddleName: {type: GraphQLString},
+        LastName: {type: new GraphQLNonNull(GraphQLString)},
+        Suffix: {type: GraphQLString},
+        DOB: {type: GraphQLString},
+        Gender: {type: new GraphQLNonNull(GraphQLString)},
+        MembershipDate: {type: GraphQLString},
+        Title: {type: GraphQLString},
+        ContactTypeID: {type: GraphQLID},
+        PhoneNumber: {type: new GraphQLNonNull(GraphQLString)},
+        PhoneNumberProviderID: {type: GraphQLID},
+        Email: {type: new GraphQLNonNull(GraphQLString)},
+        PictureID: {type: GraphQLID},
+        Status: {type: GraphQLString},
+        EnteredBy: {type: new GraphQLNonNull(GraphQLString)},
+        DateEntered: {type: new GraphQLNonNull(GraphQLString)}
+      },
+      resolve(parent, args) {
+        return Member.findByIdAndUpdate(
+          args.id,
+          { $set:  { FamilyID: args.FamilyID }},
+          { new: true }
+        ).catch( err => Error(err));
+      }
+    },
+    updateFamily: {},
+    updateOrganization: {},
+    deleteMember: {
+      type: MemberType,
+      args: {
+        id: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        const removeMember =  Member.findByIdAndDelete(args.id).exec();
+        if(!removeMember) {
+          throw new Error('Error deleting member')
+        }
+        return removeMember;
+      }
+    },
+    deleteFamily: {
+      type: FamilyType,
+      args: {
+        id: {type: GraphQLID }
+      },
+      resolve(parent, args) {
+        const deleteFamily = Family.findByIdAndDelete(args.id).exec();
+        if(!deleteFamily){
+          throw new Error('Error deleting family record')
+        }
+        return deleteFamily;
+      }
+    },
+    deleteOrganization: {
+      type: OrganizationType,
+      args: {
+        id: {type: GraphQLID }
+      },
+      resolve(parent, args) {
+        const deleteOrganization = Organization.findByIdAndDelete(args.id).exec();
+        if(!deleteOrganization){
+          throw new Error('Error deleting organization')
+        }
+        return deleteOrganization;
       }
     }
   }
