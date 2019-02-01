@@ -149,6 +149,7 @@ const RootQuery = new GraphQLObjectType({
 const Mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: {
+    /*======Add Mutations======*/
     addMember: {
       type: MemberType,
       args: {
@@ -273,6 +274,7 @@ const Mutation = new GraphQLObjectType({
         return organization.save();
       }
     },
+    /*======Update Mutations======*/
     updateMember: {
       type: MemberType,
       args: {
@@ -299,13 +301,100 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         return Member.findByIdAndUpdate(
           args.id,
-          { $set:  { FamilyID: args.FamilyID }},
+          { $set:  {
+            FamilyID: args.FamilyID,
+            OrganizationID: args.OrganizationID,
+            FirstName: args.FirstName,
+            MiddleName: args.MiddleName,
+            LastName: args.LastName,
+            Suffix: args.Suffix,
+            DOB: args.DOB,
+            Gender: args.Gender,
+            MembershipDate: args.MembershipDate,
+            Title: args.Title,
+            ContactTypeID: args.ContactTypeID,
+            PhoneNumber: args.PhoneNumber,
+            PhoneNumberProviderID: args.PhoneNumberProviderID,
+            Email: args.Email,
+            PictureID: args.PictureID,
+            Status: args.Status,
+            EnteredBy: args.EnteredBy,
+            DateEntered: args.DateEntered
+
+          }},
           { new: true }
         ).catch( err => Error(err));
       }
     },
-    updateFamily: {},
-    updateOrganization: {},
+    updateFamily: {
+      type: FamilyType,
+      args: {
+          id: {type: GraphQLID},
+          FamilyName: {type: new GraphQLNonNull(GraphQLString)},
+          Address: {type: GraphQLString},
+          Address2: {type: GraphQLString},
+          City: {type: new GraphQLNonNull(GraphQLString)},
+          State: {type: GraphQLString},
+          Zip: {type: GraphQLString},
+          Status: {type: new GraphQLNonNull(GraphQLString)},
+          EnteredBy: {type: new GraphQLNonNull(GraphQLString)},
+          DateEntered: {type: new GraphQLNonNull(GraphQLString)}
+      },
+      resolve(parent, args){
+        return Family.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              FamilyName: args.FamilyName,
+              Address: args.Address,
+              Address2: args.Address2,
+              City: args.City,
+              State: args.State,
+              Zip: args.Zip,
+              Status: args.Status,
+              EnteredBy: args.EnteredBy,
+              DateEntered: args.DateEntered
+            }
+          },
+          {new: true}
+        ).catch( err => Error(err));
+      }
+    },
+    updateOrganization: {
+      type: OrganizationType,
+      args: {},
+      resolve(parent, args) {
+        return Organization.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              Name: args.Name,
+              Address: args.Address,
+              Address2: args.Address2,
+              City: args.City,
+              State: args.State,
+              Zip: args.Zip,
+              Country: args.Country,
+              PhoneNumber: args.PhoneNumber,
+              Email: args.Email,
+              YearFounded: args.YearFounded,
+              StoryID: args.StoryID,
+              PictureID: args.PictureID,
+              VideoID: args.VideoID,
+              Description: args.Description,
+              Vision: args.Vision,
+              Mission: args.Mission,
+              Status: args.Status,
+              EnteredBy: args.EnteredBy,
+              DateEntered: args.DateEntered,
+              ParentID: args.ParentID
+            }
+          },
+          {new: true}
+        ).catch( err => Error(err));
+      }
+    },
+    /*======Delete Mutations======*/
     deleteMember: {
       type: MemberType,
       args: {
@@ -345,6 +434,7 @@ const Mutation = new GraphQLObjectType({
         return deleteOrganization;
       }
     }
+
   }
 });
 
