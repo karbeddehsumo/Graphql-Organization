@@ -105,4 +105,12 @@ const getOrganizationQuery = gql`
   }
 `
 
-export {getOrganizationsQuery, addOrganizationMutation, getOrganizationQuery};
+const deleteOrganizationMutation = gql`
+  mutation deleteOrganizationMutation($id: ID) {
+    deleteOrganization(id: $id) {
+      id
+      Name
+    }
+  }`
+
+export {getOrganizationsQuery, addOrganizationMutation, getOrganizationQuery, deleteOrganizationMutation};

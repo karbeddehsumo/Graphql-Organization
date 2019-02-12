@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
+//import { Link } from 'react-router-dom';
 import {getFamiliesQuery} from '../../queries/family';
-import  FamilyDetails  from './details';
+import FamilyDetails  from './details';
 
 class FamilyList extends Component {
   constructor(props){

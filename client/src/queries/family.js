@@ -64,6 +64,21 @@ const addFamilyMutation = gql`
 }
 `
 
+const deleteFamilyMutation = gql`
+  mutation deleteFamilyMutation($id: ID) {
+    deleteFamilyMutation(id: $id) {
+      id
+      name
+    }
+  }`
+
+const updateFamilyMutation = gql`
+  mutation updateFamilyMutation($id: String!, $name: String!) {
+    updateFamilyMutation(id: $id, FirstName: $name) {
+      id
+      FirstName
+    }
+  }`
 
 
-export {getFamiliesQuery, getFamilyQuery, addFamilyMutation};
+export {getFamiliesQuery, getFamilyQuery, addFamilyMutation, deleteFamilyMutation, updateFamilyMutation};
