@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
 //import { Link } from 'react-router-dom';
-import {getOrganizationsQuery} from '../../queries/organization';
-import {deleteOrganizationMutation } from '../../queries/organization';
+import { getOrganizationsQuery, deleteOrganizationMutation } from '../../queries/organization';
 import  OrganizationDetails  from './details';
 
 class OrganizationList extends Component {
@@ -13,12 +12,14 @@ class OrganizationList extends Component {
     }
   }
   deleteOrganization(id){
-    this.props.deleteOrganizationMutation({variables: {id}});
+    console.log("Here is it");
+    console.log(id);
+    this.props.deleteOrganizationMutation({variables: { id }});
   }
   displayOrganization(){
     var data = this.props.data;
 
-    if(data.loading)
+    if(!data)
     {
       return(<div>Data is loading...</div>);
     }
@@ -49,14 +50,12 @@ class OrganizationList extends Component {
 }
 
 
-//export default OrganizationList;
-
-export default graphql(getOrganizationsQuery)(
-  graphql(deleteOrganizationMutation)(OrganizationList)
+export default graphql(deleteOrganizationMutation)(
+  graphql(getOrganizationsQuery)(OrganizationList)
 );
 /*
 export default compose(
-  graphql(getOrganizationsQuery, {name: "getOrganizationsQuery"})
-    graphql(deleteOrganizationMutation, {name: "deleteOrganizationMutation"})
+    graphql(getOrganizationsQuery, {name: "getOrganizationsQuery"}),
+  graphql(deleteOrganizationMutation, {name: "deleteOrganizationMutation"})
 )(OrganizationList);
 */

@@ -106,7 +106,7 @@ const getOrganizationQuery = gql`
 `
 
 const deleteOrganizationMutation = gql`
-  mutation deleteOrganizationMutation($id: ID) {
+  mutation deleteOrganization($id: ID) {
     deleteOrganization(id: $id) {
       id
       Name
