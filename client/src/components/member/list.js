@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { graphql } from 'react-apollo';
-import {getMembersQuery} from '../../queries/member';
+import { graphql, compose } from 'react-apollo';
+import { getMembersQuery, deleteMemberMutation } from '../../queries/member';
 import  MemberDetails  from './details';
 
 class MemberList extends Component {
@@ -10,10 +10,12 @@ class MemberList extends Component {
       selected: null
     }
   }
+  deleteMember(id){
+    this.props.deleteMemberMutation({variables: { id }});
+  }
   displayMember(){
-    var data = this.props.data;
-    console.log("click data");
-    console.log(data);
+    var data = this.props.getMembersQuery;
+
     if(data.loading)
     {
       return(<div>Data is loading...</div>);
@@ -22,7 +24,12 @@ class MemberList extends Component {
     {
       return data.members.map(member => {
         return (
-          <li key={member.id} onClick={(e) => {this.setState({selected: member.id})}}>{member.LastName}, {member.FirstName} {member.MiddleName}</li>
+
+            <li key={member.id} onClick={(e) => {this.setState({selected: member.id})}}>
+            {member.FirstName} {member.LastName}
+            <button  onClick={() => this.deleteMember(member.id)}>X</button>
+            </li>
+
         );
       })
     }
@@ -30,14 +37,17 @@ class MemberList extends Component {
   render() {
     return (
       <div>
-        <ul id="member-list" >
+        <ul id="organization-list" >
           {this.displayMember()}
         </ul>
-        <MemberDetails familyid={this.state.selected}/>
+        <MemberDetails memberid={this.state.selected}/>
       </div>
     );
   }
 }
 
-MemberList = graphql(getMembersQuery )(MemberList)
-export default MemberList;
+
+export default compose(
+    graphql(getMembersQuery, {name: "getMembersQuery"}),
+  graphql(deleteMemberMutation, {name: "deleteMemberMutation"})
+)(MemberList);

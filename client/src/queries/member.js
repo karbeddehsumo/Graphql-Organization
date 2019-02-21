@@ -64,11 +64,11 @@ const addMemberMutation = gql`
     $Gender: String!,
     $MembershipDate: String!,
     $Title: String!,
-    $ContactTypeID: String!,
+    $ContactTypeID: ID!,
     $PhoneNumber: String!,
-    $PhoneNumberProviderID: String!,
+    $PhoneNumberProviderID: ID!,
     $Email: String!,
-    $PictureID: String!,
+    $PictureID: ID!,
     $Status: String!,
     $EnteredBy: String!,
     $DateEntered: String!
@@ -99,5 +99,12 @@ const addMemberMutation = gql`
 }
 `
 
+const deleteMemberMutation = gql`
+  mutation deleteMember($id: ID) {
+    deleteMember(id: $id) {
+      id
+      FirstName
+    }
+  }`
 
-export {getMembersQuery, getMemberQuery, addMemberMutation};
+export {getMembersQuery, getMemberQuery, addMemberMutation, deleteMemberMutation};

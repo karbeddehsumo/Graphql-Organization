@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { graphql, compose } from 'react-apollo';
-//import { Link } from 'react-router-dom';
 import { getOrganizationsQuery, deleteOrganizationMutation } from '../../queries/organization';
 import  OrganizationDetails  from './details';
 
@@ -17,9 +16,9 @@ class OrganizationList extends Component {
     this.props.deleteOrganizationMutation({variables: { id }});
   }
   displayOrganization(){
-    var data = this.props.data;
+    var data = this.props.getOrganizationsQuery;
 
-    if(!data)
+    if(data.loading)
     {
       return(<div>Data is loading...</div>);
     }
@@ -50,12 +49,7 @@ class OrganizationList extends Component {
 }
 
 
-export default graphql(deleteOrganizationMutation)(
-  graphql(getOrganizationsQuery)(OrganizationList)
-);
-/*
 export default compose(
     graphql(getOrganizationsQuery, {name: "getOrganizationsQuery"}),
   graphql(deleteOrganizationMutation, {name: "deleteOrganizationMutation"})
 )(OrganizationList);
-*/
